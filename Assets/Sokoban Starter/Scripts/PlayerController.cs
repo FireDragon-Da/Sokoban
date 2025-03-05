@@ -34,13 +34,14 @@ public class PlayerController : MonoBehaviour
                 UpdatePlayerPosition();
             }
         }
-        print($"Player Position: {playerPosition}"); 
-        print($"Player World Position: {transform.position}"); 
+        
     }
 
     private void UpdatePlayerPosition()
     {
         Vector3 worldPos = gridManager.GridToWorldPosition(playerPosition);
         transform.position = new Vector3(worldPos.x, worldPos.y, 0); 
+        //print($"Player Position: {playerPosition}"); 
+        //print($"Player World Position: {transform.position}"); 
     }
 }

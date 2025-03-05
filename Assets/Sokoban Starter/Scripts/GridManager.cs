@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    private GridMaker gridMaker;
     public int gridWidth = 10;
     public int gridHeight = 5;
     //GameObject player  = GameObject.Find("player");
@@ -19,6 +20,7 @@ public class GridManager : MonoBehaviour
         {
             return false;
         }
+        
 
         // check if occupied
         if (blockPositions.ContainsKey(newPos))
@@ -56,9 +58,9 @@ public class GridManager : MonoBehaviour
     }
     public Vector2Int GetPlayerStartPosition()
     {
-        GameObject player  = GameObject.Find("player");
+        //GameObject player  = GameObject.Find("player");
         //return new Vector2Int((int)player.transform.position.x+5, (int)player.transform.position.y); // initial state        
-        return new Vector2Int(1, 1); // initial state
+        return new Vector2Int(0, 5); // initial state
     }
 
     public bool IsPositionValid(Vector2Int position)
@@ -70,7 +72,14 @@ public class GridManager : MonoBehaviour
 
     public Vector3 GridToWorldPosition(Vector2Int gridPos)
     {
-        return new Vector3(gridPos.x + 0.5f, gridPos.y + 0.5f, 0); 
+
+        return new Vector3((gridPos.x - gridWidth/2) + 0.5f, (gridPos.y - gridHeight/2), 0); 
     }
+    public Vector2Int WorldToGridPosition(Vector3 worldPos)
+{
+    int x = Mathf.FloorToInt(worldPos.x + (gridWidth / 2));
+    int y = Mathf.FloorToInt(worldPos.y + (gridHeight / 2));
+    return new Vector2Int(x, y);
+}
 
 }
